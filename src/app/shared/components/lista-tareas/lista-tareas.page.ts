@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonItem, IonLabel, IonButton, IonNote, IonBadge } from '@ionic/angular/standalone';
+import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonItem, IonLabel, IonButton, IonNote, IonBadge, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { TareaService } from 'src/app/core/services/tarea.service';
 import { addIcons } from 'ionicons';
-import {  createOutline, trashOutline } from 'ionicons/icons';
+import {  createOutline, trashOutline, heart, close } from 'ionicons/icons';
 import { Tarea } from 'src/app/core/models/tarea.model';
 import { AlertController } from '@ionic/angular/standalone';
 import { TareaCompletadaPipe } from 'src/app/core/pipes/tarea-completada.pipe';
@@ -14,17 +14,20 @@ import { CategoriaService } from 'src/app/core/services/categoria.service';
   templateUrl: './lista-tareas.page.html',
   styleUrls: ['./lista-tareas.page.scss'],
   standalone: true,
-  imports: [IonBadge, IonNote, TareaCompletadaPipe, IonList, IonIcon, IonItemOption, IonItemOptions, IonLabel, IonItem, IonItemSliding, CommonModule]
+  providers: [TareaCompletadaPipe],
+  imports: [IonBadge, IonNote, TareaCompletadaPipe, IonList, IonIcon, IonItemOption, IonItemOptions, IonLabel, IonItem, IonItemSliding, IonSelect, IonSelectOption, IonButton, CommonModule]
 })
 export class ListaTareasPage implements OnInit {
 
   @Input() completada:boolean = false
   @ViewChild(IonList) ionList!: IonList
 
-  constructor(public _tareaService: TareaService, private alertController: AlertController, private _categoriaService: CategoriaService) {
-    addIcons({createOutline,trashOutline});
-   }
+  categoriaSeleccionada: number | null = null;
 
+  constructor(public _tareaService: TareaService, private alertController: AlertController, public _categoriaService: CategoriaService, private _tareaCompletadaPipe:TareaCompletadaPipe) {
+    addIcons({close,createOutline,trashOutline,heart});
+  }
+  
   ngOnInit() {
   }
 
@@ -136,6 +139,17 @@ export class ListaTareasPage implements OnInit {
 
   obtenerNombreCategoria(categoriaId: number | null){
     return this._categoriaService.listaCategorias.find(categoria => categoria.id === categoriaId)?.nombre
+  }
+
+  onChangeFiltroCategoria(categoria:number|string){
+    switch (categoria) {
+      case '':
+        return this._tareaService.listaTareas;
+      case 'null':
+        return this._tareaService.listaTareas.filter(tarea => tarea.categoriaId === null);
+      default:
+        return this._tareaService.listaTareas.filter(tarea => tarea.categoriaId === categoria);
+    }
   }
 
 }

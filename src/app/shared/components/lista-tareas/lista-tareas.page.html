@@ -1,6 +1,25 @@
 <ion-list>
+  
+  <ion-item >
+    <ion-select 
+      
+      value=""
+      #filtroCategoria
+      aria-label="Categorias" 
+      interface="popover" 
+      label="Filtrar por categoria" 
+      label-placement="floating"
+      >
+      <ion-select-option value="null">Sin categoria</ion-select-option>
+      <ion-select-option *ngFor="let categoria of _categoriaService.listaCategorias" [value]="categoria.id">{{categoria.nombre}}</ion-select-option>
+    </ion-select>
+    <ion-button *ngIf="filtroCategoria.value !== ''" slot="end" color="secondary" fill="clear" size="big" (click)="filtroCategoria.value = ''" >
+      <ion-icon name="close" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-item>
 
-  <ion-item-sliding *ngFor="let tarea of _tareaService.listaTareas | tareaCompletada:completada">
+  
+  <ion-item-sliding *ngFor="let tarea of onChangeFiltroCategoria(filtroCategoria.value) | tareaCompletada:completada">
     <ion-item-options side="start">
       <ion-item-option color="secondary" (click)="editarTarea( tarea )">
         <ion-icon name="create-outline" slot="icon-only"></ion-icon>

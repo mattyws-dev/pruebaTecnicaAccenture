@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonList, IonLabel, IonItem, IonItemSliding, IonItemOptions, IonItemOption, IonIcon } from '@ionic/angular/standalone';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { AlertController } from '@ionic/angular/standalone';
 import { Categoria } from 'src/app/core/models/categoria.model';
+import { addIcons } from 'ionicons';
+import { close, createOutline, trashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-lista-categoria',
@@ -13,11 +15,16 @@ import { Categoria } from 'src/app/core/models/categoria.model';
   standalone: true,
   imports: [IonIcon, IonItemOption, IonItemOptions, IonItemSliding, IonItem, IonLabel, IonList, CommonModule, FormsModule]
 })
-export class ListaCategoriaPage{
+export class ListaCategoriaPage implements OnInit{
 
   @ViewChild(IonList) ionList!: IonList
 
-  constructor(public _categoriaService:CategoriaService, private _alertController:AlertController) { }
+  constructor(public _categoriaService:CategoriaService, private _alertController:AlertController) { 
+    addIcons({close,createOutline,trashOutline});
+  }
+
+  ngOnInit(): void {
+  }
 
   async editarCategoria( categoria:Categoria ){
     const alerta = await this._alertController.create({
