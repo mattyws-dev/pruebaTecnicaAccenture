@@ -6,7 +6,9 @@ import { Categoria } from '../models/categoria.model';
 })
 export class CategoriaService {
 
-  constructor() { }
+  constructor() { 
+    this.cargarCategorias()
+  }
 
   listaCategorias: Categoria[] = [];
 

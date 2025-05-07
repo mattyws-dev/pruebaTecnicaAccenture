@@ -8,7 +8,7 @@
     </ion-item-options>
 
     <ion-item (click)="completarTarea(tarea)">
-      <ion-label slot="start">{{ tarea.descripcion }}</ion-label>
+      <ion-label slot="start">{{ tarea.descripcion | titlecase }}</ion-label>
       <ion-note slot="end" *ngIf="tarea.completada">{{tarea.fechaCompletada}}</ion-note>
       <ion-note slot="end" *ngIf="!tarea.completada">{{tarea.fechaInicio}}</ion-note>
     </ion-item>

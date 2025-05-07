@@ -18,6 +18,10 @@ export const routes:Routes = [
             {
                 path: 'completadas',
                 loadChildren: () => import('../../../modules/tareas/pages/completadas/completadas.routes').then((m)=>m.routes)
+            },
+            {
+                path: 'categorias',
+                loadChildren: () => import('../../../modules/categorias/pages/categorias/categorias.routes').then((m)=>m.routes)
             }
         ]
     },
