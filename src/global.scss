@@ -83,7 +83,7 @@
 }
 
 :root {
-	--ion-background-color: #f5f5f5;
+	--ion-background-color: #ececec;
 	--ion-background-color-rgb: 245,245,245;
 
 	--ion-text-color: #000;
@@ -169,3 +169,9 @@
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
   }
+
+.title-badge{
+	font-size: 0.9rem;       // o prueba con 1.2rem
+	border-radius: 50%;  // hace que sea completamente redondeado
+	padding: 0.4em 0.8em;  // para darle más aire
+}
