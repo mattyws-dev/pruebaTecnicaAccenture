@@ -1,16 +1,16 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title>Mis Tareas Pendientes</ion-title>
+    <ion-title>Mis Categorias</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <app-lista-tareas [completada]="false">
-  </app-lista-tareas>
+  <app-lista-categoria>
   
+  </app-lista-categoria>
+
   <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="agregarTarea()">
+    <ion-fab-button (click)="agregarCategoria()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
