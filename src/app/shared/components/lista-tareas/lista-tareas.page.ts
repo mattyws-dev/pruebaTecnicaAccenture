@@ -8,6 +8,8 @@ import { Tarea } from 'src/app/core/models/tarea.model';
 import { AlertController } from '@ionic/angular/standalone';
 import { TareaCompletadaPipe } from 'src/app/core/pipes/tarea-completada.pipe';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
+import { FirebaseConfigService } from 'src/app/core/services/firebase-config.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-lista-tareas',
@@ -15,20 +17,28 @@ import { CategoriaService } from 'src/app/core/services/categoria.service';
   styleUrls: ['./lista-tareas.page.scss'],
   standalone: true,
   providers: [TareaCompletadaPipe],
-  imports: [IonBadge, IonNote, TareaCompletadaPipe, IonList, IonIcon, IonItemOption, IonItemOptions, IonLabel, IonItem, IonItemSliding, IonSelect, IonSelectOption, IonButton, CommonModule]
+  imports: [IonBadge, IonNote, TareaCompletadaPipe, IonList, IonIcon, IonItemOption, IonItemOptions, IonLabel, IonItem, IonItemSliding, IonSelect, IonSelectOption, IonButton, CommonModule, FormsModule]
 })
 export class ListaTareasPage implements OnInit {
 
   @Input() completada:boolean = false
   @ViewChild(IonList) ionList!: IonList
 
-  categoriaSeleccionada: number | null = null;
+  categoriaSeleccionada: number | string = '';
+  showFeature: boolean = false
 
-  constructor(public _tareaService: TareaService, private alertController: AlertController, public _categoriaService: CategoriaService, private _tareaCompletadaPipe:TareaCompletadaPipe) {
+  constructor(
+    public _tareaService: TareaService, 
+    private alertController: AlertController, 
+    public _categoriaService: CategoriaService, 
+    private _tareaCompletadaPipe:TareaCompletadaPipe,
+    private _firebaseConfigService: FirebaseConfigService
+  ) {
     addIcons({close,createOutline,trashOutline,heart});
   }
   
   ngOnInit() {
+    this._firebaseConfigService.isFeatureEnabled('showNewFeature').then(flag => this.showFeature = flag)
   }
 
   async completarTarea(tarea:Tarea){
