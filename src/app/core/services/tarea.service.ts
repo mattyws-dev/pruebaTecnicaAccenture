@@ -21,8 +21,8 @@ export class TareaService {
     }
   }
 
-  crearTarea(descripcion:string){
-    this.listaTareas.push(new Tarea(descripcion))
+  crearTarea(descripcion:string, categoriaId: number){
+    this.listaTareas.push(new Tarea(descripcion, categoriaId))
     this.guardarTarea()
   }
 
