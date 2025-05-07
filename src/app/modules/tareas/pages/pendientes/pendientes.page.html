@@ -2,15 +2,33 @@
   <ion-toolbar color="primary">
     <ion-title>
       Tareas Pendientes
-      <ion-badge class="title-badge" color="light">{{numeroTareas}}</ion-badge>
+      <ion-badge class="title-badge" color="light">{{tareasPedientes.length}}</ion-badge>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <app-lista-tareas (numeroTareas)="numeroTareas = $event" [completada]="false">
+  <ion-list *ngIf="_tareaService.listaTareas.length === 0">
+    <ion-item >
+      <ion-label>
+        <h1>No tienes tareas registradas. ¡Comienza agregando una!</h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="tareasPedientes.length === 0 && _tareaService.listaTareas.length > 0">
+    <ion-item >
+      <ion-label>
+        <h1>¡Felicidades! No tienes tareas pendientes.</h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <app-lista-tareas *ngIf="tareasPedientes.length > 0" [completada]="false">
   </app-lista-tareas>
+
+
   
   <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="agregarTarea()">
