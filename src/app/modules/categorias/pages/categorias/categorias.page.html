@@ -1,11 +1,13 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title>Mis Categorias</ion-title>
+    <ion-title>Mis Categorias
+      <ion-badge class="title-badge" color="light">{{numeroCategorias}}</ion-badge>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-lista-categoria>
+  <app-lista-categoria (numeroCategorias)="numeroCategorias = $event">
   
   </app-lista-categoria>
 

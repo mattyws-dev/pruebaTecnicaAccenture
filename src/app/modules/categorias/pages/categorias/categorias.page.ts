@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFab, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFab, IonIcon, IonBadge } from '@ionic/angular/standalone';
 import { ListaCategoriaPage } from '../../components/lista-categoria/lista-categoria.page';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { AlertController } from '@ionic/angular/standalone';
@@ -11,9 +11,11 @@ import { AlertController } from '@ionic/angular/standalone';
   templateUrl: './categorias.page.html',
   styleUrls: ['./categorias.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonFab, IonFabButton, ListaCategoriaPage, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonBadge, IonIcon, IonFab, IonFabButton, ListaCategoriaPage, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CategoriasPage implements OnInit {
+
+  numeroCategorias!: number
 
   constructor(private _categoriaService:CategoriaService, private _alertController:AlertController) { }
 

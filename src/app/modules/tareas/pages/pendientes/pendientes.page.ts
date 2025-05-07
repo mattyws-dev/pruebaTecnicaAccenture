@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonFabButton, IonFab } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonFabButton, IonFab, IonBadge } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { addOutline } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular/standalone';
@@ -14,9 +14,11 @@ import { CategoriaService } from 'src/app/core/services/categoria.service';
   templateUrl: './pendientes.page.html',
   styleUrls: ['./pendientes.page.scss'],
   standalone: true,
-  imports: [IonFab, IonFabButton, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ListaTareasPage]
+  imports: [IonBadge, IonFab, IonFabButton, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ListaTareasPage]
 })
 export class PendientesPage implements OnInit {
+
+  numeroTareas!:number
 
   constructor(private alertController: AlertController, private _tareaService:TareaService, private _categoriaService:CategoriaService) { 
     addIcons({addOutline});

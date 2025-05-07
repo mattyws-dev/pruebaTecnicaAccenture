@@ -1,12 +1,15 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title>Mis Tareas Pendientes</ion-title>
+    <ion-title>
+      Tareas Pendientes
+      <ion-badge class="title-badge" color="light">{{numeroTareas}}</ion-badge>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <app-lista-tareas [completada]="false">
+  <app-lista-tareas (numeroTareas)="numeroTareas = $event" [completada]="false">
   </app-lista-tareas>
   
   <ion-fab  slot="fixed" vertical="bottom" horizontal="end">

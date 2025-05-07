@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonItem, IonLabel, IonButton, IonNote, IonBadge, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { TareaService } from 'src/app/core/services/tarea.service';
@@ -14,20 +14,23 @@ import { CategoriaService } from 'src/app/core/services/categoria.service';
   templateUrl: './lista-tareas.page.html',
   styleUrls: ['./lista-tareas.page.scss'],
   standalone: true,
+  providers: [TareaCompletadaPipe],
   imports: [IonBadge, IonNote, TareaCompletadaPipe, IonList, IonIcon, IonItemOption, IonItemOptions, IonLabel, IonItem, IonItemSliding, IonSelect, IonSelectOption, IonButton, CommonModule]
 })
 export class ListaTareasPage implements OnInit {
 
   @Input() completada:boolean = false
+  @Output() numeroTareas = new EventEmitter<number>()
   @ViewChild(IonList) ionList!: IonList
 
   categoriaSeleccionada: number | null = null;
 
-  constructor(public _tareaService: TareaService, private alertController: AlertController, public _categoriaService: CategoriaService) {
+  constructor(public _tareaService: TareaService, private alertController: AlertController, public _categoriaService: CategoriaService, private _tareaCompletadaPipe:TareaCompletadaPipe) {
     addIcons({close,createOutline,trashOutline,heart});
    }
 
   ngOnInit() {
+    this.numeroTareas.emit(this._tareaCompletadaPipe.transform(this._tareaService.listaTareas, this.completada).length)
   }
 
   async completarTarea(tarea:Tarea){
