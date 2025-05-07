@@ -44,18 +44,15 @@ Instrucciones de Instalación y Compilación
 ### Instalación
 Clonar el repositorio, inicias el proyecto en la linea de comandos e instalar dependencias
 - npm install
-Instalas cordova
 - npm install -g cordova
-Agrega Cordova al proyecto
 - ionic integrations enable cordova
-Agrega las plataformas (Android e iOS)
 - ionic cordova platform add android
 - ionic cordova platform add ios
-Construye la app para producción
 - ionic cordova platform add android
-Copia los archivos de www/ a Cordova
 - cordova prepare android
 - cordova prepare ios
+
+  
 Abre platforms/android en Android Studio.
 Ve a Build > Generate APK
 Cuando compilas con Cordova o desde Android Studio, el APK generado normalmente se guarda en esta ruta:
