@@ -8,7 +8,11 @@
     </ion-item-options>
 
     <ion-item (click)="completarTarea(tarea)">
-      <ion-label slot="start">{{ tarea.descripcion | titlecase }}</ion-label>
+      <ion-label slot="start">
+        <ion-badge color="secondary" *ngIf="tarea.categoriaId === null">Sin categoria</ion-badge>
+        <ion-badge color="secondary" *ngIf="tarea.categoriaId != null">{{obtenerNombreCategoria(tarea.categoriaId)}}</ion-badge>
+        <p>{{ tarea.descripcion | titlecase }}</p>
+      </ion-label>
       <ion-note slot="end" *ngIf="tarea.completada">{{tarea.fechaCompletada}}</ion-note>
       <ion-note slot="end" *ngIf="!tarea.completada">{{tarea.fechaInicio}}</ion-note>
     </ion-item>
