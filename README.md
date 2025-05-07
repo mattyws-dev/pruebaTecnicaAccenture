@@ -42,9 +42,7 @@ Instrucciones de Instalación y Compilación
 - JDK 8 o superior
 
 ### Instalación
-Clona el repositorio
-Inicias el proyecto en la linea de comandos
-Instalas dependencias
+Clonar el repositorio, inicias el proyecto en la linea de comandos e instalar dependencias
 - npm install
 Instalas cordova
 - npm install -g cordova
