@@ -5,6 +5,8 @@ import { IonList, IonLabel, IonItem, IonItemSliding, IonItemOptions, IonItemOpti
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { AlertController } from '@ionic/angular/standalone';
 import { Categoria } from 'src/app/core/models/categoria.model';
+import { addIcons } from 'ionicons';
+import { close, createOutline, trashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-lista-categoria',
@@ -15,13 +17,13 @@ import { Categoria } from 'src/app/core/models/categoria.model';
 })
 export class ListaCategoriaPage implements OnInit{
 
-  @Output()  numeroCategorias = new EventEmitter<number>()
   @ViewChild(IonList) ionList!: IonList
 
-  constructor(public _categoriaService:CategoriaService, private _alertController:AlertController) { }
+  constructor(public _categoriaService:CategoriaService, private _alertController:AlertController) { 
+    addIcons({close,createOutline,trashOutline});
+  }
 
   ngOnInit(): void {
-    this.numeroCategorias.emit(this._categoriaService.listaCategorias.length)
   }
 
   async editarCategoria( categoria:Categoria ){

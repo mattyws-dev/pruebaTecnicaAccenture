@@ -1,14 +1,22 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title>Mis Categorias
-      <ion-badge class="title-badge" color="light">{{numeroCategorias}}</ion-badge>
+      <ion-badge class="title-badge" color="light">{{_categoriaService.listaCategorias.length}}</ion-badge>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-lista-categoria (numeroCategorias)="numeroCategorias = $event">
-  
+  <ion-list *ngIf="_categoriaService.listaCategorias.length === 0">
+    <ion-item >
+      <ion-label>
+        <h1>No tienes categorias registradas. ¡Comienza agregando una!</h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <app-lista-categoria *ngIf="_categoriaService.listaCategorias.length > 0">
+
   </app-lista-categoria>
 
   <ion-fab  slot="fixed" vertical="bottom" horizontal="end">

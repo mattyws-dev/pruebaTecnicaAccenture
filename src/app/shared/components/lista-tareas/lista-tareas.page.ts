@@ -20,17 +20,15 @@ import { CategoriaService } from 'src/app/core/services/categoria.service';
 export class ListaTareasPage implements OnInit {
 
   @Input() completada:boolean = false
-  @Output() numeroTareas = new EventEmitter<number>()
   @ViewChild(IonList) ionList!: IonList
 
   categoriaSeleccionada: number | null = null;
 
   constructor(public _tareaService: TareaService, private alertController: AlertController, public _categoriaService: CategoriaService, private _tareaCompletadaPipe:TareaCompletadaPipe) {
     addIcons({close,createOutline,trashOutline,heart});
-   }
-
+  }
+  
   ngOnInit() {
-    this.numeroTareas.emit(this._tareaCompletadaPipe.transform(this._tareaService.listaTareas, this.completada).length)
   }
 
   async completarTarea(tarea:Tarea){
